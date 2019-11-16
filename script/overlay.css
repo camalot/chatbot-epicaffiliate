@@ -1,0 +1,193 @@
+:root {
+	--body-opacity: 1;
+	--title-font-size: 2em;
+	--help-font-size: 1.5em;
+	--bg-color: rgba(0, 0, 0, 1);
+	--background-image: none;
+	--img-bg-color: rgba(0, 0, 0, 1);
+	--outline-color: rgba(240, 240, 240, 1);
+	--text-color: rgba(255, 255, 255, 1);
+	--command-color: rgba(153, 74, 0, 1);
+
+	--box-border-radius-topleft: 0;
+	--box-border-radius-topright: 0;
+	--box-border-radius-bottomleft: 0;
+	--box-border-radius-bottomright: 0;
+
+	--font-name: 'days-one';
+
+	--help-margin-top: 0;
+	--help-margin-right: 0;
+	--help-margin-bottom: 0;
+	--help-margin-left: 10px;
+
+	--command-margin-top: 0;
+	--command-margin-right: 0;
+	--command-margin-bottom: 0;
+	--command-margin-left: 12px;
+
+
+	--title-margin-left: 12px;
+	--title-margin-top: 16px;
+	--title-margin-right: 0;
+	--title-margin-bottom: 0;
+
+	--icon-margin-left: 0;
+	--icon-margin-top: 0;
+	--icon-margin-right: 12px;
+	--icon-margin-bottom: 0;
+}
+body, html {
+	background-color: rgba(0, 0, 0, 0);
+	color: var(--text-color,rgba(255, 255, 255, 1));
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+
+#config-messages {
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	background-color: red;
+	color: white;
+	font-size: 4vh;
+	font-weight: bold;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 10px;
+}
+#config-messages header {
+	text-align: center;
+	margin: 2vh 0 5vh 0;
+}
+#config-messages div.group {
+	margin: 0 0 5vh 0;
+}
+
+
+.hidden {
+	display:none;
+}
+
+#ad-host {
+	position: relative;
+	opacity: var(--body-opacity, 1);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	
+	background-color: var(--bg-color, rgba(0, 0, 0, 0));
+	background-image: var(--background-image, none);
+	color: var(--text-color,rgba(255, 255, 255, 1));
+	height: 100px;
+	
+	font-family: var(--font-name, 'days-one'), Arial, Helvetica, sans-serif;
+
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-size-adjust: 4px;
+	-webkit-text-stroke-color: var(--outline-color, rgba(0, 0, 0, 1));
+	
+	border-top-left-radius: var(--box-border-radius-topleft, 0);
+	border-top-right-radius: var(--box-border-radius-topright, 0);
+	border-bottom-left-radius: var(--box-border-radius-bottomleft, 0);
+	border-bottom-right-radius: var(--box-border-radius-bottomright, 0);
+
+
+}
+
+#ad-bg {
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+}
+
+.ad-item {
+	z-index: 999;
+	position: relative;
+}
+
+.icon {
+	padding: 0;
+	margin-top: var(--icon-margin-top, 0px);
+	margin-right: var(--icon-margin-right, 12px);
+	margin-bottom: var(--icon-margin-bottom, 0px);
+	margin-left: var(--icon-margin-left, 0px);
+	float: left;
+	vertical-align: middle;
+	background-color: var(--img-bg-color, rgba(0, 0, 0, 1));
+}
+.icon img {
+    height: 96px;
+    width: 96px;
+    padding: 0;
+    margin: 0;
+}
+.label {
+	float: left;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.title {
+	padding-left: var(--title-margin-left, 12px);
+	padding-right: var(--title-margin-right, 0px);
+	margin-top: var(--title-margin-top, 16px);
+	margin-bottom: var(--title-margin-bottom, 0px);
+	white-space: nowrap;
+	font-weight: bold;
+	color: var(--text-color,rgba(255, 255, 255, 1));
+	font-size: var(--title-font-size, 1.5em);
+	text-overflow: ellipsis;
+	overflow: hidden;
+	float: left;
+	max-width: 420px;
+}
+
+.sub-title {
+	font-size: var(--help-font-size, 1.5em);
+	color: var(--text-color,rgba(255, 255, 255, 1));
+	padding: 0;
+	padding-top: var(--help-margin-top, 0px);
+	padding-right: var(--help-margin-right, 0px);
+	padding-bottom: var(--help-margin-bottom, 0px);
+	padding-left: var(--help-margin-left, 10px);
+	white-space: nowrap;
+	overflow: hidden;
+	float: left;
+	clear: left;
+	max-width: 450px;
+}
+
+.sub-title code {
+	margin-top: var(--command-margin-top, 0px);
+	margin-right: var(--command-margin-right, 0px);
+	margin-bottom: var(--command-margin-bottom, 0px);
+	margin-left: var(--command-margin-left, 12px);
+
+	color: var(--command-color,#fa4);
+	font-weight: bold;
+	-webkit-text-stroke-width: 0;
+	-webkit-text-size-adjust: 0;
+	font-size: var(--help-font-size, 1.5em);
+
+}
+
+
+#ad-host.none {
+	animation-name: no-animation;
+}
+
+@keyframes no-animation {
+	0% {
+
+	}
+	100% {
+
+	}
+}

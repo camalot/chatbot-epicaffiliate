@@ -1,0 +1,516 @@
+{
+	"output_file": "settings.json",
+	"Command": {
+		"type": "textbox",
+		"label": "Command",
+		"value": "!link",
+		"tooltip": "The Chat Command\nUsage: !link <number>",
+		"group": "DEFAULT"
+	},
+	"CommandMessage": {
+		"type": "textbox",
+		"label": "Command Help Text",
+		"value": "Get The Game Now: ",
+		"tooltip": "The Help Text",
+		"group": "DEFAULT"
+	},
+	"ResponseMessage": {
+		"type": "textbox",
+		"label": "Response Message",
+		"value": "You can get '$epicGame' and support this channel by going to $epicLink",
+		"tooltip": "The Help Text",
+		"group": "DEFAULT"
+	},
+	"CreatorCode": {
+		"type": "textbox",
+		"label": "CreatorCode",
+		"value": "",
+		"tooltip": "Your EPIC Creator Code",
+		"group": "DEFAULT"
+	},
+	"DisplaySeconds": {
+		"type": "slider",
+		"label": "Display Time (seconds)",
+		"value": 10,
+		"min": 0,
+		"max": 600,
+		"ticks": 1,
+		"tooltip": "The number of seconds to display each item.",
+		"group": "DEFAULT"
+	},
+	"BetweenAdDelay": {
+		"type": "slider",
+		"label": "Delay Between (seconds)",
+		"value": 10,
+		"min": 0,
+		"max": 600,
+		"ticks": 1,
+		"tooltip": "The number of seconds of delay between each item.",
+		"group": "DEFAULT"
+	},
+	"OpenOverlayInBrowser": {
+		"type": "button",
+		"label": "OPEN OVERLAY IN BROWSER",
+		"tooltip": "Opens the overlay in browser for testing",
+		"function": "OpenOverlayInBrowser",
+		"wsevent": "EVENT_NONE",
+		"group": "DEFAULT"
+	},
+	"InTransition": {
+		"type": "dropdown",
+		"value": "slideInRight",
+		"items": [
+			"bounceIn",
+			"bounceInDown",
+			"bounceInLeft",
+			"bounceInRight",
+			"bounceInUp",
+			"fadeIn",
+			"fadeInDown",
+			"fadeInDownBig",
+			"fadeInLeft",
+			"fadeInLeftBig",
+			"fadeInRight",
+			"fadeInRightBig",
+			"fadeInUp",
+			"fadeInUpBig",
+			"flip",
+			"flipInX",
+			"flipInY",
+			"jackInTheBox",
+			"lightSpeedIn",
+			"rollIn",
+			"rotateIn",
+			"rotateInDownLeft",
+			"rotateInDownRight",
+			"rotateInUpLeft",
+			"rotateInUpRight",
+			"slideInUp",
+			"slideInDown",
+			"slideInLeft",
+			"slideInRight",
+			"zoomIn",
+			"zoomInDown",
+			"zoomInLeft",
+			"zoomInRight",
+			"zoomInUp"
+		],
+		"label": "In Transition",
+		"tooltip": "Set how the alert transitions in",
+		"group": "STYLE"
+	},
+	"InAttentionAnimation": {
+		"type": "dropdown",
+		"value": "pulse",
+		"items": [
+			"none",
+			"bounce",
+			"flash",
+			"jello",
+			"heartBeat",
+			"pulse",
+			"rubberBand",
+			"shake",
+			"tada",
+			"wobble"
+		],
+		"label": "Attention Animation",
+		"tooltip": "Animation after it shows",
+		"group": "STYLE"
+	},
+	"OutTransition": {
+		"type": "dropdown",
+		"value": "slideOutRight",
+		"items": [
+			"none",
+			"bounceOut",
+			"bounceOutDown",
+			"bounceOutLeft",
+			"bounceOutRight",
+			"bounceOutUp",
+			"fadeOut",
+			"fadeOutDown",
+			"fadeOutDownBig",
+			"fadeOutLeft",
+			"fadeOutLeftBig",
+			"fadeOutRight",
+			"fadeOutRightBig",
+			"fadeOutUp",
+			"fadeOutUpBig",
+			"flip",
+			"flipOutX",
+			"flipOutY",
+			"hinge",
+			"lightSpeedOut",
+			"rollOut",
+			"rotateOut",
+			"rotateOutDownLeft",
+			"rotateOutDownRight",
+			"rotateOutUpLeft",
+			"rotateOutUpRight",
+			"slideOutUp",
+			"slideOutDown",
+			"slideOutLeft",
+			"slideOutRight",
+			"zoomOut",
+			"zoomOutDown",
+			"zoomOutLeft",
+			"zoomOutRight",
+			"zoomOutUp"
+		],
+		"label": "Out Transition",
+		"tooltip": "Set how the alert transitions out",
+		"group": "STYLE"
+	},
+	"OutAttentionAnimation": {
+		"type": "dropdown",
+		"value": "pulse",
+		"items": [
+			"none",
+			"bounce",
+			"flash",
+			"jello",
+			"heartBeat",
+			"pulse",
+			"rubberBand",
+			"shake",
+			"tada",
+			"wobble"
+		],
+		"label": "Attention Animation",
+		"tooltip": "Animation after it shows",
+		"group": "STYLE"
+	},
+	"Opacity": {
+		"type": "slider",
+		"label": "Opacity",
+		"value": 0,
+		"min": 0,
+		"max": 100,
+		"ticks": 1,
+		"tooltip": "The opacity of the overlay",
+		"group": "STYLE"
+	},
+	"FontName": {
+		"type": "dropdown",
+		"value": "days-one",
+		"items": [
+			"custom",
+			"amaranth",
+			"allan",
+			"bangers",
+			"bowlby-one",
+			"changa-one",
+			"days-one",
+			"droid-sans",
+			"fugaz-one"
+		],
+		"label": "Attention Animation",
+		"tooltip": "Animation after it shows",
+		"group": "STYLE"
+	},
+	"CustomFontName": {
+		"type": "textbox",
+		"label": "Font Name",
+		"value": "",
+		"tooltip": "A custom font from Adobe Edge Fonts",
+		"group": "STYLE"
+	},
+	"BackgroundColor": {
+		"type": "colorpicker",
+		"label": "Background Color",
+		"value": "rgba(0,0,0,1)",
+		"tooltip": "Background Color",
+		"group": "STYLE"
+	},
+	"BackgroundImage": {
+		"type": "textbox",
+		"label": "Background Image Url",
+		"value": "",
+		"tooltip": "Url to an image to use as a background.",
+		"group": "STYLE"
+	},
+	"BackgroundVideo": {
+		"type": "textbox",
+		"label": "Background Video Url",
+		"value": "",
+		"tooltip": "Url to an video to use as a background.",
+		"group": "STYLE"
+	},
+	"ImageBackgroundColor": {
+		"type": "colorpicker",
+		"label": "Image Background Color",
+		"value": "rgba(0,0,0,1)",
+		"tooltip": "Image Background Color",
+		"group": "STYLE"
+	},
+	"ForegroundColor": {
+		"type": "colorpicker",
+		"label": "Foreground Color",
+		"value": "rgba(255,255,255,1)",
+		"tooltip": "Foreground Color",
+		"group": "STYLE"
+	},
+	"CommandColor": {
+		"type": "colorpicker",
+		"label": "Command Color",
+		"value": "rgba(153, 74, 0, 1)",
+		"tooltip": "Command Color",
+		"group": "STYLE"
+	},
+	"OutlinedColor": {
+		"type": "colorpicker",
+		"label": "Text Outline Color",
+		"value": "rgba(0,0,0,1)",
+		"tooltip": "Text Outline Color",
+		"group": "STYLE"
+	},
+	"TitleFontSize": {
+		"type": "slider",
+		"label": "Title Font Size (em)",
+		"value": 2,
+		"min": 1,
+		"max": 3,
+		"ticks": 0.1,
+		"tooltip": "The title font size",
+		"group": "STYLE"
+	},
+	"HelpFontSize": {
+		"type": "slider",
+		"label": "Help Font Size (em)",
+		"value": 1.5,
+		"min": 1,
+		"max": 3,
+		"ticks": 0.1,
+		"tooltip": "The help font size",
+		"group": "STYLE"
+	},
+	"BoxBorderRadiusTopRight": {
+		"type": "slider",
+		"label": "Box Border Radius Top Right (px)",
+		"value": 0,
+		"min": 0,
+		"max": 100,
+		"ticks": 1,
+		"tooltip": "The top right border radius",
+		"group": "STYLE"
+	},
+	"BoxBorderRadiusTopLeft": {
+		"type": "slider",
+		"label": "Box Border Radius Top Left (px)",
+		"value": 0,
+		"min": 0,
+		"max": 100,
+		"ticks": 1,
+		"tooltip": "The top left border radius",
+		"group": "STYLE"
+	},
+	"BoxBorderRadiusBottomRight": {
+		"type": "slider",
+		"label": "Box Border Radius Bottom Right (px)",
+		"value": 0,
+		"min": 0,
+		"max": 100,
+		"ticks": 1,
+		"tooltip": "The bottom right border radius",
+		"group": "STYLE"
+	},
+	"BoxBorderRadiusBottomLeft": {
+		"type": "slider",
+		"label": "Box Border Radius Bottom Left (px)",
+		"value": 0,
+		"min": 0,
+		"max": 100,
+		"ticks": 1,
+		"tooltip": "The bottom left border radius",
+		"group": "STYLE"
+	},
+	"IconMarginTop": {
+		"type": "slider",
+		"label": "Icon Margin Top (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The icon margin-top",
+		"group": "STYLE"
+	},
+	"IconMarginBottom": {
+		"type": "slider",
+		"label": "Icon Margin Bottom (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The icon margin-bottom",
+		"group": "STYLE"
+	},
+	"IconMarginRight": {
+		"type": "slider",
+		"label": "Icon Margin Right (px)",
+		"value": 12,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The icon margin-right",
+		"group": "STYLE"
+	},
+	"IconMarginLeft": {
+		"type": "slider",
+		"label": "Icon Margin Left (px)",
+		"value": 10,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The icon margin-left",
+		"group": "STYLE"
+	},
+	"TitleMarginTop": {
+		"type": "slider",
+		"label": "Title Margin Top (px)",
+		"value": 16,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The title margin-top",
+		"group": "STYLE"
+	},
+	"TitleMarginBottom": {
+		"type": "slider",
+		"label": "Title Margin Bottom (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The title margin-bottom",
+		"group": "STYLE"
+	},
+	"TitleMarginRight": {
+		"type": "slider",
+		"label": "Title Margin Right (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The title margin-right",
+		"group": "STYLE"
+	},
+	"TitleMarginLeft": {
+		"type": "slider",
+		"label": "Title Margin Left (px)",
+		"value": 12,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The title margin-left",
+		"group": "STYLE"
+	},
+	"HelpMarginTop": {
+		"type": "slider",
+		"label": "Help Margin Top (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The help margin-top",
+		"group": "STYLE"
+	},
+	"HelpMarginBottom": {
+		"type": "slider",
+		"label": "Help Margin Bottom (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The help margin-bottom",
+		"group": "STYLE"
+	},
+	"HelpMarginRight": {
+		"type": "slider",
+		"label": "Help Margin Right (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The help margin-right",
+		"group": "STYLE"
+	},
+	"HelpMarginLeft": {
+		"type": "slider",
+		"label": "Help Margin Left (px)",
+		"value": 10,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The help margin-left",
+		"group": "STYLE"
+	},
+	"CommandMarginTop": {
+		"type": "slider",
+		"label": "Command Margin Top (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The command margin-top",
+		"group": "STYLE"
+	},
+	"CommandMarginBottom": {
+		"type": "slider",
+		"label": "Command Margin Bottom (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The command margin-bottom",
+		"group": "STYLE"
+	},
+	"CommandMarginRight": {
+		"type": "slider",
+		"label": "Command Margin Right (px)",
+		"value": 0,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The command margin-right",
+		"group": "STYLE"
+	},
+	"CommandMarginLeft": {
+		"type": "slider",
+		"label": "Command Margin Left (px)",
+		"value": 12,
+		"min": 0,
+		"max": 50,
+		"ticks": 1,
+		"tooltip": "The command margin-left",
+		"group": "STYLE"
+	},
+	"OpenDonateLink": {
+		"type": "button",
+		"label": "Donate",
+		"tooltip": "Donate to support development",
+		"function": "OpenDonateLink",
+		"wsevent": "EVENT_NONE"
+	},
+	"OpenFollowOnTwitchLink": {
+		"type": "button",
+		"label": "Follow Me On Twitch",
+		"tooltip": "Get Medal",
+		"function": "OpenFollowOnTwitchLink",
+		"wsevent": "EVENT_NONE"
+	},
+	"OpenReadMeLink": {
+		"type": "button",
+		"label": "Open ReadMe",
+		"tooltip": "Open ReadMe file",
+		"function": "OpenReadMeLink",
+		"wsevent": "EVENT_NONE"
+	},
+	"OpenScriptUpdater": {
+		"type": "button",
+		"label": "Check For Updates",
+		"tooltip": "Check for updates",
+		"function": "OpenScriptUpdater",
+		"wsevent": "EVENT_NONE"
+	}
+}
