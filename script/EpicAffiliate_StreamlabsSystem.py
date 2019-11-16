@@ -42,20 +42,20 @@ ReadMeFile = "https://github.com/" + Repo + "/blob/develop/ReadMe.md"
 SettingsFile = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), "settings.json")
 
-# DataUrl = "https://www.epicgames.com/affiliate/api/get-dashboard-data?aggregation=daily&endDate=2019-11-02&startDate=2019-10-02&sort=ASC&count=1"
-DataFile = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data.json")
+DataUrl = "https://cdn.jsdelivr.net/gh/camalot/epic-data-converter@develop/epic.json"
 ScriptSettings = None
 Initialized = False
 EpicData = None
 KnownBots = None
 
 class AffiliateData(object):
-    def __init__(self, dataFile):
+    def __init__(self, dataUrl):
         try:
             self.Links = []
-            with codecs.open(dataFile, encoding="utf-8", mode="r") as f:
-                data = json.load(f, encoding="utf-8")
-                self.Links = data
+            # with codecs.open(dataFile, encoding="utf-8", mode="r") as f:
+            #     data = json.load(f, encoding="utf-8")
+            data = json.loads(json.loads(Parent.GetRequest(dataUrl, {}))['response'])
+            self.Links = data
         except Exception as e:
             Parent.Log(ScriptName, str(e))
 
@@ -151,7 +151,7 @@ def Init():
     KnownBots = TwitchBot()
     # Load saved settings and validate values
     ScriptSettings = Settings(SettingsFile)
-    EpicData = AffiliateData(DataFile)
+    EpicData = AffiliateData(DataUrl)
 
     SendSettingsUpdate()
 
