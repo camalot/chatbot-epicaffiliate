@@ -109,12 +109,7 @@ function connectWebsocket() {
 
 				// runGameRotation();
 				break;
-			case "EVENT_EPICAFFILIATE_NEXT":
-				window.AD_INDEX += 1;
-				runGameRotation();
-				break;
-			case "EVENT_EPICAFFILIATE_PREVIOUS":
-				window.AD_INDEX -= 1;
+			case "EVENT_EPICAFFILIATE_RANDOM":
 				runGameRotation();
 				break;
 			case "EVENT_EPICAFFILIATE_SETTINGS":
