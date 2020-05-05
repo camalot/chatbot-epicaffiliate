@@ -36,7 +36,6 @@ Creator = "DarthMinos"
 Version = "1.0.0-snapshot"
 Repo = "camalot/chatbot-epicaffiliate"
 
-DonateLink = "https://paypal.me/camalotdesigns"
 ReadMeFile = "https://github.com/" + Repo + "/blob/develop/ReadMe.md"
 
 SettingsFile = os.path.join(os.path.dirname(
@@ -318,8 +317,14 @@ def OpenWordFile():
     return
 
 
-def OpenDonateLink():
-    os.startfile(DonateLink)
+def OpenPaypalDonateLink():
+    os.startfile("https://paypal.me/camalotdesigns/10")
+    return
+def OpenGithubDonateLink():
+    os.startfile("https://github.com/sponsors/camalot")
+    return
+def OpenTwitchDonateLink():
+    os.startfile("http://twitch.tv/darthminos/subscribe")
     return
 
 def OpenOverlayInBrowser():
