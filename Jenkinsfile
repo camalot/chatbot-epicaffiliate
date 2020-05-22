@@ -6,7 +6,7 @@ if(env.BRANCH_NAME ==~ /master$/) {
 }
 
 node ("linux") {
-	def ProjectName = "chatbot-epicaffilate"
+	def ProjectName = "chatbot-epicaffiliate"
 	def slack_notify_channel = null
 
 	def MAJOR_VERSION = 1
