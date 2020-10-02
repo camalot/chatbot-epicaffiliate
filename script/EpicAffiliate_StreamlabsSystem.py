@@ -326,7 +326,9 @@ def OpenGithubDonateLink():
 def OpenTwitchDonateLink():
     os.startfile("http://twitch.tv/darthminos/subscribe")
     return
-
+def OpenDiscordLink():
+    os.startfile("https://discord.com/invite/vzdpjYk")
+    return
 def OpenOverlayInBrowser():
     os.startfile(os.path.realpath(os.path.join(
         os.path.dirname(__file__), "overlay.html")))
