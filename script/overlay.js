@@ -177,7 +177,7 @@ function runGameRotation() {
 				.removeClass()
 				.addClass(`${settings.InTransition} animated`)
 				.one(animationEndClasses, function () {
-					console.log("end in transition")
+					console.log("end in transition");
 					$(this)
 						.off(animationEndClasses)
 						.removeClass()
@@ -249,7 +249,8 @@ jQuery(document).ready(function () {
 		initializeUI();
 
 		$.ajax({
-			url: "https://cdn.jsdelivr.net/gh/camalot/epic-data-converter@develop/epic.json",
+			//url: "https://cdn.jsdelivr.net/gh/camalot/epic-data-converter@develop/epic.json",
+			url: "https://raw.githubusercontent.com/camalot/epic-data-converter/develop/epic.json",
 			method: "get",
 			dataType: "json",
 			success: function (data) {

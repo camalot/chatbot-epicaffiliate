@@ -163,8 +163,8 @@ def Init():
     if Initialized:
         Logger.debug("Skip Initialization. Already Initialized.")
         return
-
     ScriptSettings = Settings(SettingsFile)
+    Logger = GetLogger()
     KnownBots = TwitchBot()
     # Load saved settings and validate values
     EpicData = AffiliateData(DataUrl)

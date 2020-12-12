@@ -161,7 +161,6 @@ body, html {
 	overflow: hidden;
 	float: left;
 	clear: left;
-	max-width: 450px;
 }
 
 .sub-title code {
