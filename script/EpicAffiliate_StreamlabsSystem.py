@@ -38,10 +38,12 @@ Repo = "camalot/chatbot-epicaffiliate"
 
 ReadMeFile = "https://github.com/" + Repo + "/blob/develop/ReadMe.md"
 
-SettingsFile = os.path.join(os.path.dirname(
-    os.path.realpath(__file__)), "settings.json")
+UIConfigFile = os.path.join(os.path.dirname(__file__), "UI_Config.json")
+SettingsFile = os.path.join(os.path.dirname(os.path.realpath(__file__)), "settings.json")
 
-DataUrl = "https://cdn.jsdelivr.net/gh/camalot/epic-data-converter@develop/epic.json"
+# DataUrl = "https://cdn.jsdelivr.net/gh/camalot/epic-data-converter@develop/epic.json"
+DataUrl = "https://raw.githubusercontent.com/camalot/epic-data-converter/develop/epic.json"
+
 ScriptSettings = None
 Initialized = False
 EpicData = None
@@ -72,68 +74,40 @@ class Settings(object):
 
     def __init__(self, settingsfile=None):
         """ Load in saved settings file if available else set default values. """
+        defaults = self.DefaultSettings(UIConfigFile)
         try:
-            self.Command = "!link"
-            self.CommandMessage = "Get The Game Now: "
-            self.DisplaySeconds = 10
-            self.BetweenAdDelay = 10
-            self.Opacity = 100,
-            self.TitleFontSize = 2
-            self.HelpFontSize = 1.5
-
-            self.HelpColor = "rgba(0,0,0,1)"
-            self.BackgroundColor = "rgba(0,0,0,1)"
-            self.IconBackgroundColor = "rgba(0,0,0,1)"
-            self.OutlineColor = "rgba(240,240,240,1)"
-            self.TextColor = "rgba(255,255,255,1)"
-            self.CommandColor = "rgba(153,74,0,1)"
-
-            self.FontName = "days-one"
-            self.CustomFontName = ""
-
-            self.BoxBorderRadiusTopRight = 0
-            self.BoxBorderRadiusTopLeft = 0
-            self.BoxBorderRadiusBottomRight = 0
-            self.BoxBorderRadiusBottomLeft = 0
-
-            self.CommandMarginTop = 0
-            self.CommandMarginLeft = 12
-            self.CommandMarginBottom = 0
-            self.CommandMarginRight = 0
-
-            self.HelpMarginTop = 0
-            self.HelpMarginLeft = 10
-            self.HelpMarginBottom = 0
-            self.HelpMarginRight = 0
-
-            self.TitleMarginTop = 0
-            self.TitleMarginLeft = 12
-            self.TitleMarginBottom = 0
-            self.TitleMarginRight = 0
-
-            self.IconMarginTop = 0
-            self.IconMarginLeft = 0
-            self.IconMarginBottom = 0
-            self.IconMarginRight = 12
-
-            self.InTransition = "slideInRight"
-            self.InAttentionAnimation = "pulse"
-            self.OutTransition = "slideOutRight"
-            self.OutAttentionAnimation = "pulse"
-            self.ResponseMessage = "You can get $epicGame and support this channel by going to $epicLink"
-            self.CreatorCode = ""
             with codecs.open(settingsfile, encoding="utf-8-sig", mode="r") as f:
-                fileSettings = json.load(f, encoding="utf-8")
-                self.__dict__.update(fileSettings)
+                settings = json.load(f, encoding="utf-8")
+            self.__dict__ = Merge(defaults, settings)
+        except Exception as ex:
+            if Logger:
+                Logger.error(str(ex))
+            else:
+                Parent.Log(ScriptName, str(ex))
+            self.__dict__ = defaults
 
-        except Exception as e:
-            Parent.Log(ScriptName, str(e))
-
+    def DefaultSettings(self, settingsfile=None):
+        defaults = dict()
+        with codecs.open(settingsfile, encoding="utf-8-sig", mode="r") as f:
+            ui = json.load(f, encoding="utf-8")
+        for key in ui:
+            if 'value' in ui[key]:
+                try:
+                    defaults[key] = ui[key]['value']
+                except:
+                    if key != "output_file":
+                        if Logger:
+                            Logger.warn("DefaultSettings(): Could not find key {0} in settings".format(key))
+                        else:
+                            Parent.Log(ScriptName, "DefaultSettings(): Could not find key {0} in settings".format(key))
+        return defaults
     def Reload(self, jsonData):
         """ Reload settings from the user interface by given json data. """
-        Parent.Log(ScriptName, "Reload Settings")
-        fileLoadedSettings = json.loads(jsonData, encoding="utf-8")
-        self.__dict__.update(fileLoadedSettings)
+        if Logger:
+            Logger.debug("Reload Settings")
+        else:
+            Parent.Log(ScriptName, "Reload Settings")
+        self.__dict__ = Merge(self.DefaultSettings(UIConfigFile), json.loads(jsonData, encoding="utf-8"))
 
 
 def Init():
@@ -234,6 +208,27 @@ def SendSettingsUpdate():
 def IsTwitchBot(user):
     return user.lower() in KnownBots.Names
 
+def Merge(source, destination):
+    """
+    >>> a = { 'first' : { 'all_rows' : { 'pass' : 'dog', 'number' : '1' } } }
+    >>> b = { 'first' : { 'all_rows' : { 'fail' : 'cat', 'number' : '5' } } }
+    >>> merge(b, a) == { 'first' : { 'all_rows' : { 'pass' : 'dog', 'fail' : 'cat', 'number' : '5' } } }
+    True
+    """
+    for key, value in source.items():
+        if isinstance(value, dict):
+            # get node or create one
+            node = destination.setdefault(key, {})
+            Merge(value, node)
+        elif isinstance(value, list):
+            destination.setdefault(key, value)
+        else:
+            if key in destination:
+                pass
+            else:
+                destination.setdefault(key, value)
+
+    return destination
 
 def str2bool(v):
     if not v:
