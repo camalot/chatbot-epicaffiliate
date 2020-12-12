@@ -17,6 +17,8 @@ import shutil
 import tempfile
 from HTMLParser import HTMLParser
 import argparse
+import logging
+from logging.handlers import TimedRotatingFileHandler
 
 clr.AddReference("IronPython.SQLite.dll")
 clr.AddReference("IronPython.Modules.dll")
@@ -48,6 +50,7 @@ ScriptSettings = None
 Initialized = False
 EpicData = None
 KnownBots = None
+Logger = None
 
 class AffiliateData(object):
     def __init__(self, dataUrl):
@@ -58,7 +61,7 @@ class AffiliateData(object):
             data = json.loads(json.loads(Parent.GetRequest(dataUrl, {}))['response'])
             self.Links = data
         except Exception as e:
-            Parent.Log(ScriptName, str(e))
+            Logger.error(str(e))
 
 class TwitchBot(object):
     def __init__(self):
@@ -67,7 +70,7 @@ class TwitchBot(object):
                 "https://api.twitchinsights.net/v1/bots/online", {}))['response'])['bots']
             self.Names = [bot[0].lower() for bot in botData]
         except Exception as e:
-            Parent.Log(ScriptName, str(e))
+            Logger.error(str(e))
 
 class Settings(object):
     """ Class to hold the script settings, matching UI_Config.json. """
@@ -110,20 +113,60 @@ class Settings(object):
         self.__dict__ = Merge(self.DefaultSettings(UIConfigFile), json.loads(jsonData, encoding="utf-8"))
 
 
+class StreamlabsLogHandler(logging.StreamHandler):
+    def emit(self, record):
+        try:
+            message = self.format(record)
+            Parent.Log(ScriptName, message)
+            self.flush()
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except:
+            self.handleError(record)
+
+def GetLogger():
+    log = logging.getLogger(ScriptName)
+    log.setLevel(logging.DEBUG)
+
+    sl = StreamlabsLogHandler()
+    sl.setFormatter(logging.Formatter("%(funcName)s(): %(message)s"))
+    sl.setLevel(logging.INFO)
+    log.addHandler(sl)
+
+    fl = TimedRotatingFileHandler(filename=os.path.join(os.path.dirname(
+        __file__), "info"), when="w0", backupCount=8, encoding="utf-8")
+    fl.suffix = "%Y%m%d"
+    fl.setFormatter(logging.Formatter(
+        "%(asctime)s  %(funcName)s(): %(levelname)s: %(message)s"))
+    fl.setLevel(logging.INFO)
+    log.addHandler(fl)
+
+    if ScriptSettings.DebugMode:
+        dfl = TimedRotatingFileHandler(filename=os.path.join(os.path.dirname(
+            __file__), "debug"), when="h", backupCount=24, encoding="utf-8")
+        dfl.suffix = "%Y%m%d%H%M%S"
+        dfl.setFormatter(logging.Formatter(
+            "%(asctime)s  %(funcName)s(): %(levelname)s: %(message)s"))
+        dfl.setLevel(logging.DEBUG)
+        log.addHandler(dfl)
+
+    log.debug("Logger initialized")
+    return log
+
 def Init():
     global ScriptSettings
     global Initialized
     global KnownBots
     global EpicData
+    global Logger
+
     if Initialized:
-        Parent.Log(ScriptName, "Skip Initialization. Already Initialized.")
+        Logger.debug("Skip Initialization. Already Initialized.")
         return
 
-    Parent.Log(ScriptName, "Initialize")
-
+    ScriptSettings = Settings(SettingsFile)
     KnownBots = TwitchBot()
     # Load saved settings and validate values
-    ScriptSettings = Settings(SettingsFile)
     EpicData = AffiliateData(DataUrl)
 
     SendSettingsUpdate()
@@ -142,11 +185,10 @@ def Execute(data):
     if data.IsChatMessage():
         commandTrigger = data.GetParam(0).lower()
         if not ScriptSettings.CreatorCode:
-            Parent.Log(ScriptName, "CREATOR CODE not set")
+            Logger.warn("CREATOR CODE not set")
             return
         # ignore messages from bots
         if IsTwitchBot(data.UserName):
-            Parent.Log(ScriptName, "IT'S A BOT")
             return
         if commandTrigger == ScriptSettings.Command.lower():
             if data.GetParamCount() > 1:
@@ -170,7 +212,7 @@ def Tick():
 
 
 def ScriptToggled(state):
-    Parent.Log(ScriptName, "State Changed: " + str(state))
+    Logger.debug("State Changed: " + str(state))
     if state:
         Init()
     else:
@@ -183,7 +225,7 @@ def ScriptToggled(state):
 
 
 def ReloadSettings(jsondata):
-    Parent.Log(ScriptName, "Reload Settings")
+    Logger.debug("Reload Settings")
     # Reload saved settings and validate values
     Unload()
     Init()
@@ -199,7 +241,7 @@ def Parse(parseString, user, target, message):
 
 
 def SendWebsocketData(eventName, payload):
-    Parent.Log(ScriptName, "Trigger Event: " + eventName)
+    Logger.debug("Trigger Event: " + eventName)
     Parent.BroadcastWsEvent(eventName, json.dumps(payload))
     return
 def SendSettingsUpdate():
@@ -254,15 +296,15 @@ def OpenScriptUpdater():
     currentDir = os.path.realpath(os.path.dirname(__file__))
     chatbotRoot = os.path.realpath(os.path.join(currentDir, "../../../"))
     libsDir = os.path.join(currentDir, "libs/updater")
-    Parent.Log(ScriptName, libsDir)
+    Logger.debug(libsDir)
     try:
         src_files = os.listdir(libsDir)
         tempdir = tempfile.mkdtemp()
-        Parent.Log(ScriptName, tempdir)
+        Logger.debug(tempdir)
         for file_name in src_files:
             full_file_name = os.path.join(libsDir, file_name)
             if os.path.isfile(full_file_name):
-                Parent.Log(ScriptName, "Copy: " + full_file_name)
+                Logger.debug("Copy: " + full_file_name)
                 shutil.copy(full_file_name, tempdir)
         updater = os.path.join(tempdir, "ChatbotScriptUpdater.exe")
         updaterConfigFile = os.path.join(tempdir, "update.manifest")
@@ -285,14 +327,15 @@ def OpenScriptUpdater():
                 "name": repoVals[1]
             }
         }
-        Parent.Log(ScriptName, updater)
+        Logger.debug(updater)
         configJson = json.dumps(updaterConfig)
-        Parent.Log(ScriptName, configJson)
+        Logger.debug(configJson)
         with open(updaterConfigFile, "w+") as f:
             f.write(configJson)
         os.startfile(updater)
         return
     except OSError as exc:  # python >2.5
+        Logger.error(str(exc))
         raise
     return
 
