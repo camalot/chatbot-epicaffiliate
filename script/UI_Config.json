@@ -30,9 +30,16 @@
 	},
 	"CreatorCode": {
 		"type": "textbox",
-		"label": "CreatorCode",
+		"label": "Creator Code",
 		"value": "",
 		"tooltip": "Your EPIC Creator Code",
+		"group": "DEFAULT"
+	},
+	"CreatorCodeId": {
+		"type": "textbox",
+		"label": "Creator Code ID",
+		"value": "",
+		"tooltip": "Your EPIC Creator Code ID",
 		"group": "DEFAULT"
 	},
 	"DisplaySeconds": {

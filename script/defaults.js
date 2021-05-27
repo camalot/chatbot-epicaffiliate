@@ -1,8 +1,10 @@
 var DEFAULT_SETTINGS = {
+  "DebugMode": false,
   "Command": "!link",
   "CommandMessage": "Get The Game Now: ",
   "ResponseMessage": "You can get '$epicGame' and support this channel by going to $epicLink",
   "CreatorCode": "",
+  "CreatorCodeId": "",
   "DisplaySeconds": 10,
   "BetweenAdDelay": 10,
   "InTransition": "slideInRight",

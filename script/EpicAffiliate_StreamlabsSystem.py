@@ -187,6 +187,9 @@ def Execute(data):
         if not ScriptSettings.CreatorCode:
             Logger.warn("CREATOR CODE not set")
             return
+        if not ScriptSettings.CreatorCodeId:
+            Logger.warn("CREATOR CODE ID not set")
+            return
         # ignore messages from bots
         if IsTwitchBot(data.UserName):
             return
@@ -233,8 +236,11 @@ def ReloadSettings(jsondata):
 
 def ResponseParse(parseString, game):
     resultString = parseString
-    return resultString.replace("$epicGame", game['name']).replace("$epicLink", game['link']).replace("{{CREATORCODE}}", ScriptSettings.CreatorCode)
-
+    resultString = resultString.replace("$epicGame", game['name'])
+    resultString = resultString.replace("$epicLink", game['link'])
+    resultString = resultString.replace("{{CREATORCODE}}", ScriptSettings.CreatorCode)
+    resultString = resultString.replace("{{CREATORCODEID}}", ScriptSettings.CreatorCodeId)
+    
 def Parse(parseString, user, target, message):
     resultString = parseString
     return resultString
