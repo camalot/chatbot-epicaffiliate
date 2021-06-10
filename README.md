@@ -1,7 +1,6 @@
-# CHATBOT TWITCH TEAM
+# CHATBOT EPIC AFFILIATE
 
-A script that will automatically shoutout a streamer from the specified twitch team.
-
+An overlay that shows links to games on epic, and a command for chat to get a referral link.
 
 ## REQUIREMENTS
 
@@ -11,7 +10,7 @@ A script that will automatically shoutout a streamer from the specified twitch t
 
 ## INSTALL
 
-- Download the latest zip file from [Releases](https://github.com/camalot/chatbot-twitchteam/releases/latest)
+- Download the latest zip file from [Releases](https://github.com/camalot/chatbot-epicaffiliate/releases/latest)
 - Right-click on the downloaded zip file and choose `Properties`
 - Click on `Unblock`  
 [![](https://i.imgur.com/vehSSn7l.png)](https://i.imgur.com/vehSSn7.png)  
